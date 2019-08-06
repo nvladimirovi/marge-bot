@@ -151,6 +151,12 @@ def _parse_config(args):
         help='Order marge merges assigned requests. created_at (default) or updated_at.\n',
     )
     parser.add_argument(
+        '--merge-order-priority',
+        default=None,
+        choices=('P0'),
+        help='Gets the mrs with the highest priority first, then the others. \n',
+    )
+    parser.add_argument(
         '--approval-reset-timeout',
         type=time_interval,
         default='0s',
@@ -297,6 +303,7 @@ def main(args=None):
             branch_regexp=options.branch_regexp,
             source_branch_regexp=options.source_branch_regexp,
             merge_order=options.merge_order,
+            merge_order_priority=options.merge_order_priority,
             merge_opts=bot.MergeJobOptions.default(
                 add_tested=options.add_tested,
                 add_part_of=options.add_part_of,
